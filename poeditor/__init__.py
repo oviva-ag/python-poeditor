@@ -8,7 +8,7 @@
     >>> projects = client.list_projects()
 """
 
-__version__ = "1.2.0"
+__version__ = "2.0.0"
 
 try:
     from .client import POEditorAPI, POEditorException, POEditorArgsException
