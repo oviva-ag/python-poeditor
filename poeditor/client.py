@@ -668,7 +668,7 @@ class POEditorAPI(object):
             )
         return data['result']
 
-    def update_terms(self, project_id, file_path=None, language_code=None,
+    def upload_terms(self, project_id, file_path=None, language_code=None,
                      overwrite=False, sync_terms=False, tags=None, fuzzy_trigger=None):
         """
         Updates terms
@@ -696,14 +696,14 @@ class POEditorAPI(object):
             fuzzy_trigger=fuzzy_trigger
         )
 
-    def update_terms_definitions(self, project_id, file_path=None,
+    def upload_terms_definitions(self, project_id, file_path=None,
                                  language_code=None, overwrite=False,
                                  sync_terms=False, tags=None, fuzzy_trigger=None):
         warnings.warn(
             "This method has been renamed update_terms_translations",
             DeprecationWarning, stacklevel=2
         )
-        return self.update_terms_translations(
+        return self.upload_terms_translations(
             project_id,
             file_path,
             language_code,
@@ -713,9 +713,9 @@ class POEditorAPI(object):
             fuzzy_trigger
         )
 
-    def update_terms_translations(self, project_id, file_path=None,
-                                 language_code=None, overwrite=False,
-                                 sync_terms=False, tags=None, fuzzy_trigger=None):
+    def upload_terms_translations(self, project_id, file_path=None,
+                                  language_code=None, overwrite=False,
+                                  sync_terms=False, tags=None, fuzzy_trigger=None):
         """
         Updates terms translations
 
@@ -742,13 +742,13 @@ class POEditorAPI(object):
             fuzzy_trigger=fuzzy_trigger
         )
 
-    def update_definitions(self, project_id, file_path=None,
+    def upload_definitions(self, project_id, file_path=None,
                            language_code=None, overwrite=False, fuzzy_trigger=None):
         warnings.warn(
             "This method has been renamed update_translations",
             DeprecationWarning, stacklevel=2
         )
-        return self.update_translations(
+        return self.upload_translations(
             project_id,
             file_path,
             language_code,
@@ -756,7 +756,7 @@ class POEditorAPI(object):
             fuzzy_trigger
         )
 
-    def update_translations(self, project_id, file_path=None,
+    def upload_translations(self, project_id, file_path=None,
                             language_code=None, overwrite=False, fuzzy_trigger=None):
         """
         Updates translations
