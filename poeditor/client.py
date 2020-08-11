@@ -9,18 +9,18 @@
 """
 
 import json
-import requests
 import sys
 import tempfile
 import warnings
-
 from datetime import datetime
+
+import requests
 
 __all__ = ['POEditorException', 'POEditorArgsException', 'POEditorAPI']
 
-
 if sys.version_info < (3, 2):
     from datetime import timedelta
+
 
     def parse_datetime(dt_string):
         # Hacky and not really equivalent to the Python3.2 version but will do for most use cases,
@@ -427,6 +427,70 @@ class POEditorAPI(object):
             data=json.dumps(data)
         )
         return data['result']['terms']
+
+    def add_translations(self, project_id, language, data):
+        """
+        Adds translations to project. If translation exists, it will not overwrite it.
+        >>> data = [
+            {
+                "term": "Projects",
+                "context": "project list",
+                "translation": {
+                    "content": "Des projets"
+                }
+            }
+        ]
+        """
+        data = self._run(
+            url_path="translations/add",
+            id=project_id,
+            language=language,
+            data=json.dumps(data)
+        )
+        return data['result']['translations']
+
+    def update_translations(self, project_id, language, data):
+        """
+        Updates existing translations.
+        >>> data = [
+            {
+                "term": "Projects",
+                "context": "project list",
+                "translation": {
+                    "content": "Des projets"
+                }
+            }
+        ]
+        """
+        data = self._run(
+            url_path="translations/update",
+            id=project_id,
+            language=language,
+            data=json.dumps(data)
+        )
+        return data['result']['translations']
+
+    def delete_translations(self, project_id, language, data):
+        """
+        Deletes translations from specified language.
+        >>> data = [
+            {
+                "term": "Projects",
+                "context": "project list"
+            },
+            {
+                "term": "Languages",
+                "context": ""
+            }
+        ]
+        """
+        data = self._run(
+            url_path="translations/delete",
+            id=project_id,
+            language=language,
+            data=json.dumps(data)
+        )
+        return data['result']['translations']
 
     def sync_terms(self, project_id, data):
         """
